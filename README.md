@@ -105,8 +105,12 @@ Note: this goes against the current spec which currently suggests to use aria-la
 Currently, footnotes and endnotes are defined by DPUB, but there is no good way to link a note reference number to the actual note.
 
 ```html
-<p>Here is my footnote<span role="doc-noteref" aria-details="footnote1">1</span>.</p>
-<p id="footnote1" role="doc-footnote">1. A footnote has little to do with actual feet.</p>
+<p>
+  Here is my footnote<span role="doc-noteref" aria-details="footnote1">1</span>.
+</p>
+<p id="footnote1" role="doc-footnote">
+  1. A footnote has little to do with actual feet.
+</p>
 ```
 
 ### Example -- Comment section for a specific piece of content
@@ -162,14 +166,26 @@ A revision or suggestion used to group required children of insertion and deleti
 ### Example -- Suggestion
 
 ```html
-<p>The best pet is a <span role="suggestion"><span role="deletion">cat</span><span role="insertion">dog</span></span></p>
+<p>
+  The best pet is a
+  <span role="suggestion">
+    <span role="deletion">cat</span>
+    <span role="insertion">dog</span>
+  </span>
+</p>
 ```
 
 ### Example -- Revision
 
 ```html
 
-<p>The best pet is a <span role="revision"><span role="deletion">cat</span><span role="insertion">dog</span></span></p>
+<p>
+  The best pet is a
+  <span role="revision">
+    <span role="deletion">cat</span>
+    <span role="insertion">dog</span>
+  </span>
+</p>
 ```
 
 Technical note: some browser implementations may need to special case a change from suggestion to revision, so that when a user accepts the suggestion, an accessible object is not unnecessarily destroyed and recreated, as may be done for other role changes.
@@ -183,15 +199,33 @@ Revisions and suggestions are commonly used used in conjunction with a structure
 ### Example -- Suggestion with comment
 
 ```html
-<p>The best pet is a <span role="suggestion" aria-details="comment-thread-1"><span role="deletion">cat</span><span role="insertion">dog</span></span></p>
-<div id="comment-thread-1" role="commentsection"><p>Suggested change from Frederico"</p><p>I think dogs are better</p><button>Accept</buton></div>
+<p>
+  The best pet is a
+  <span role="suggestion" aria-details="comment-thread-1">
+    <span role="deletion">cat</span>
+    <span role="insertion">dog</span>
+  </span>
+</p>
+<div id="comment-thread-1" role="commentsection">
+  <p>Suggested change from Frederico"</p>
+  <p>I think dogs are better</p>
+  <button>Accept</buton>
+</div>
 ```
 
 ### Example -- Revision with additional attribution information
 
 ```html
-<p>The best pet is a <span role="revision" aria-details="attribution-1"><span role="deletion">cat</span><span role="insertion">dog</span></span></p>
-<div id="attribution-1">Modified by user aleventhal on 10/10/2020</div>
+<p>
+  The best pet is a
+  <span role="revision" aria-details="attribution-1">
+    <span role="deletion">cat</span>
+    <span role="insertion">dog</span>
+  </span>
+</p>
+<div id="attribution-1">
+  Modified by user aleventhal on 10/10/2020
+</div>
 ```
 
 # Implementation Status and Instructions for Testing
