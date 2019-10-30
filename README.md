@@ -1,11 +1,7 @@
 # Simplified ARIA Annotations Proposal & Explainer
 
 
-[TOC]
-
-
-
-# Summary {#summary}
+# Summary
 
 ARIA Annotations provide markup for accessible, in-page annotations, using experimental ARIA markup. This proposal is for markup targeted to become an integrated part of ARIA 1.3. It supersedes the current separate ARIA Annotations draft specification.
 
@@ -17,9 +13,7 @@ The markup described has already been reviewed by a number of accessibility deve
 # Example Use Cases {#example-use-cases}
 
 
-## 
-Web Content use cases {#web-content-use-cases}
-
+## Web Content use cases {#web-content-use-cases}
 
 
 *   Document editor: suggestions, revisions, comments, footnotes and other authors present
@@ -44,7 +38,7 @@ Web Content use cases {#web-content-use-cases}
 
 *   aria-description=”[localized string]” (similar to how aria-label can be used instead of aria-labelledby. This is a generically useful attribute that has been requested for years, and can be placed on any element. [GitHub issue for aria-description](https://github.com/w3c/aria/issues/891).
 *   role=”suggestion”|”revision” -- used to group changes in a document (role “deletion” and “insertion” children).
-*   role=”mark” -- equivalent to HTML’s <mark>, to indicate highlighted text that has a special meaning or additional information tied to it (via aria-details=[id]). Future specific types of highlights could inherit from this, for example, code editor use cases could expand ARIA annotations to add breakpoint, error and warning roles. [GitHub issue for role=”mark”](https://github.com/w3c/aria/issues/508). Annotated content may or may not be highlighted.
+*   role=”mark” -- equivalent to HTML’s &lt;mark&gt;, to indicate highlighted text that has a special meaning or additional information tied to it (via aria-details=[id]). Future specific types of highlights could inherit from this, for example, code editor use cases could expand ARIA annotations to add breakpoint, error and warning roles. [GitHub issue for role=”mark”](https://github.com/w3c/aria/issues/508). Annotated content may or may not be highlighted.
 *   role=”commentsection”, inheriting from feed, to be used on a group of comments. When something has a related comment, it would use aria-details to point to the comment section. Individual comments would use role=”comment”, inheriting from “article”, and supporting aria-level (in addition to the inherited aria-posinset and aria-setsize).
 
 
@@ -69,15 +63,15 @@ Examples:
 
 
 1. **Content is being edited by another author:** \
-<p aria-description=”User bigbluehat is editing this nearby”>Some text.</p>
+&lt;p aria-description=”User bigbluehat is editing this nearby”&gt;Some text.&lt;/p&gt;
 
 In some cases, it may be helpful to provide a simple annotation purpose that is more specific than “definition”. This can be done via aria-roledescription:
 
 
 
 2. **A code editor provides a warning:** \
-<mark aria-roledescription=”warning” aria-description=”Undefined global”>myVar</mark> \
-(alternatively use <span role=”mark”> with the rest being the same).
+&lt;mark aria-roledescription=”warning” aria-description=”Undefined global”&gt;myVar&lt;/mark&gt; \
+(alternatively use &lt;span role=”mark”&gt; with the rest being the same).
 
 In the future, commonly-used simple annotation purposes may be added to ARIA by creating new roles inheriting from “mark”, e.g. “breakpoint”. This would aid in filtering features of screen readers.
 
@@ -85,7 +79,7 @@ In the future, commonly-used simple annotation purposes may be added to ARIA by 
 ## 2. Structured annotations {#2-structured-annotations}
 
 
-Structured ARIA Annotations build upon the foundation of <code>[aria-details](https://www.w3.org/TR/wai-aria-1.2/#aria-details)</code>, providing optional additions needed to enhance the reading experience of consuming annotated content via assistive technology.
+Structured ARIA Annotations build upon the foundation of &lt;code&gt;[aria-details](https://www.w3.org/TR/wai-aria-1.2/#aria-details)&lt;/code&gt;, providing optional additions needed to enhance the reading experience of consuming annotated content via assistive technology.
 
 
 The Accessible Rich Internet Applications [wai-aria-1.2] specification explains the use of aria-details as "[identifying] the element that provides a detailed, extended description for the object." ARIA Annotations build on that foundation and provide further contextual meaning via the use of role values specific to annotation use cases.
@@ -97,28 +91,28 @@ Examples:
 
 1. **Definition of a word**: \
 Note: this goes against the current spec which suggests to use aria-labelledby. \
-<p>Caesar’s army crossed the <term aria-details=”rubicon-def”>Rubicon</term>.</p> \
-<div role=”definition”>A shallow river in Italy. <a href=””>See Wikipedia entry</a>.</p>
+&lt;p&gt;Caesar’s army crossed the &lt;term aria-details=”rubicon-def”&gt;Rubicon&lt;/term&gt;.&lt;/p&gt; \
+&lt;div role=”definition”&gt;A shallow river in Italy. &lt;a href=””&gt;See Wikipedia entry&lt;/a&gt;.&lt;/p&gt;
 2. **Footnote or endnote:** \
-<p>Here is my footnote<span role=”doc-noteref” aria-details=”footnote1”>1</span>.</p> \
-<p id=”footnote1” role=”doc-footnote”>1. A footnote has little to do with actual feet.</p>
+&lt;p&gt;Here is my footnote&lt;span role=”doc-noteref” aria-details=”footnote1”&gt;1&lt;/span&gt;.&lt;/p&gt; \
+&lt;p id=”footnote1” role=”doc-footnote”&gt;1. A footnote has little to do with actual feet.&lt;/p&gt;
 3. **Commentary for a specific piece of content:** \
-<p>The <span aria-details="thread-1">cat is smart</span>.</p> \
-<div role="commentsection" id="thread-1"> \
-  <div role=”comment”> \
+&lt;p&gt;The &lt;span aria-details="thread-1"&gt;cat is smart&lt;/span&gt;.&lt;/p&gt; \
+&lt;div role="commentsection" id="thread-1"&gt; \
+  &lt;div role=”comment”&gt; \
      As far as you can tell! Does she talk? \
-      <div role=”comment”> \
+      &lt;div role=”comment”&gt; \
          Yes, but only I understand her \
-      </div> \
-  </div> \
-  <form> \
-    <textarea placeholder=”Reply here…”></textarea> \
-    <input type=”submit”> \
-  </form> \
-</div>
+      &lt;/div&gt; \
+  &lt;/div&gt; \
+  &lt;form&gt; \
+    &lt;textarea placeholder=”Reply here…”&gt;&lt;/textarea&gt; \
+    &lt;input type=”submit”&gt; \
+  &lt;/form&gt; \
+&lt;/div&gt;
 4. **Commentary section for entire article: \
-**<article aria-details=”all-comments”>...</article> \
-<div id=”all-comments” role="commentsection"...</div>
+**&lt;article aria-details=”all-comments”&gt;...&lt;/article&gt; \
+&lt;div id=”all-comments” role="commentsection"...&lt;/div&gt;
 
 
 ## 3. Transient structured annotations {#3-transient-structured-annotations}
@@ -128,8 +122,8 @@ In some cases, structured annotations may only appear when a user navigates to a
 
 
 5. Example -- **Rich tooltip in a code editor, linking other references to a symbol: \
-**<div>String <span aria-details=”catName-refs”>catName</span>;</div> \
-<div id=”catName-refs” role=”tooltip”>.. Several links to catName references ...</div>
+**&lt;div&gt;String &lt;span aria-details=”catName-refs”&gt;catName&lt;/span&gt;;&lt;/div&gt; \
+&lt;div id=”catName-refs” role=”tooltip”&gt;.. Several links to catName references ...&lt;/div&gt;
 
 
 ## 4. Content changes -- suggestions and revisions {#4-content-changes-suggestions-and-revisions}
@@ -143,9 +137,9 @@ Examples:
 
 
 1. Suggestion: \
-<p>The best pet is a <span role="suggestion"><span role="deletion">cat</span><span role="insertion">dog</span></span></p>
+&lt;p&gt;The best pet is a &lt;span role="suggestion"&gt;&lt;span role="deletion"&gt;cat&lt;/span&gt;&lt;span role="insertion"&gt;dog&lt;/span&gt;&lt;/span&gt;&lt;/p&gt;
 2. Completed revision: \
-<p>The best pet is a <span role="revision"><span role="deletion">cat</span><span role="insertion">dog</span></span></p>
+&lt;p&gt;The best pet is a &lt;span role="revision"&gt;&lt;span role="deletion"&gt;cat&lt;/span&gt;&lt;span role="insertion"&gt;dog&lt;/span&gt;&lt;/span&gt;&lt;/p&gt;
 
 Note: some browser implementations may need to special case a change from suggestion to revision, so that when a user accepts the suggestion, an accessible object is not unnecessarily destroyed and recreated, as may be done for other role changes.
 
@@ -161,11 +155,11 @@ Examples:
 
 
 1. Suggestion with comment: \
-<p>The best pet is a <span role="suggestion" aria-details="comment-thread-1"><span role="deletion">cat</span><span role="insertion">dog</span></span></p> \
-<div id="comment-thread-1" role="commentary"><p>I think dogs are better</p><button>Accept</buton></div>
+&lt;p&gt;The best pet is a &lt;span role="suggestion" aria-details="comment-thread-1"&gt;&lt;span role="deletion"&gt;cat&lt;/span&gt;&lt;span role="insertion"&gt;dog&lt;/span&gt;&lt;/span&gt;&lt;/p&gt; \
+&lt;div id="comment-thread-1" role="commentary"&gt;&lt;p&gt;I think dogs are better&lt;/p&gt;&lt;button&gt;Accept&lt;/buton&gt;&lt;/div&gt;
 2. Revision with additional attribution information: \
-<p>The best pet is a <span role="revision" aria-details="attribution-1"><span role="deletion">cat</span><span role="insertion">dog</span></span></p> \
-<div id="attribution-1">Modified by user aleventhal on 10/10/2020</div>
+&lt;p&gt;The best pet is a &lt;span role="revision" aria-details="attribution-1"&gt;&lt;span role="deletion"&gt;cat&lt;/span&gt;&lt;span role="insertion"&gt;dog&lt;/span&gt;&lt;/span&gt;&lt;/p&gt; \
+&lt;div id="attribution-1"&gt;Modified by user aleventhal on 10/10/2020&lt;/div&gt;
 
 
 # Implementation Status and Instructions for Testing {#implementation-status-and-instructions-for-testing}
@@ -221,3 +215,4 @@ This explainer takes steps to use consistent terminology and modeling from the W
 
     The annotation purpose is the role the annotation body plays in relation to the annotated content (e.g. comment section vs. a footnote). \
 TBD: explain the difference between this and when the role is put on the annotated content itself, e.g. role=”mark”.
+
