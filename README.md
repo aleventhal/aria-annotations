@@ -40,7 +40,7 @@ The markup described has already been reviewed by a number of accessibility deve
 *   aria-description="[localized string]" (similar to how aria-label can be used instead of aria-labelledby. This is a generically useful attribute that has been requested for years, and can be placed on any element. [GitHub issue for aria-description](https://github.com/w3c/aria/issues/891).
 *   role="suggestion"|"revision" -- used to group changes in a document (role "deletion" and "insertion" children).
 *   role="mark" -- equivalent to HTML’s `<mark>`, to indicate highlighted text that has a special meaning or additional information tied to it (via aria-details=[id]). Future specific types of highlights could inherit from this, for example, code editor use cases could expand ARIA annotations to add breakpoint, error and warning roles. [GitHub issue for role="mark"](https://github.com/w3c/aria/issues/508). Annotated content may or may not be highlighted.
-*   role="commentsection", inheriting from feed, to be used on a group of comments. When something has a related comment, it would use aria-details to point to the comment section. Individual comments would use role="comment", inheriting from "article", and supporting aria-level (in addition to the inherited aria-posinset and aria-setsize).
+*   role="commentsection" and "comment". A commentsection, inheriting from feed, is used to denote group of comments. Content would point toa related commentsection via aria-details. Individual comments within the comment section would use role="comment", inheriting from "article", and supporting aria-level (in addition to the inherited aria-posinset and aria-setsize).
 
 
 # Clarification of existing markup
