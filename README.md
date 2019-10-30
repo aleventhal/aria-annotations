@@ -1,7 +1,7 @@
 # Simplified ARIA Annotations Proposal & Explainer
 
 
-# Summary {#summary}
+# Summary
 
 ARIA Annotations provide markup for accessible, in-page annotations, using experimental ARIA markup. This proposal is for markup targeted to become an integrated part of ARIA 1.3. It supersedes the current separate ARIA Annotations draft specification.
 
