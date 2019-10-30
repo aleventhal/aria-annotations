@@ -10,10 +10,10 @@ Annotations provide additional content related to a piece of content within a do
 The markup described has already been reviewed by a number of accessibility developers and stakeholders in key organizations, although no public signals have been provided. 
 
 
-# Example Use Cases {#example-use-cases}
+# Example Use Cases
 
 
-## Web Content use cases {#web-content-use-cases}
+## Web Content use cases
 
 
 
@@ -22,7 +22,7 @@ The markup described has already been reviewed by a number of accessibility deve
 *   Published content: attributions, footnotes and comments
 
 
-## How Assistive Technology can utilize annotation semantics {#how-assistive-technology-can-utilize-annotation-semantics}
+## How Assistive Technology can utilize annotation semantics
 
 
 
@@ -33,7 +33,7 @@ The markup described has already been reviewed by a number of accessibility deve
 *   User adjusts setting for annotation verbosity in screen reader, e.g. all, shortened, none. Screen reader adjusts output, e.g. in shortened Braille "has commentary" becomes something like "\*ct", audio output utilizes an earcon/sound.
 
 
-# Summary of proposed new markup {#summary-of-proposed-new-markup}
+# Summary of proposed new markup
 
 
 
@@ -43,7 +43,7 @@ The markup described has already been reviewed by a number of accessibility deve
 *   role="commentsection", inheriting from feed, to be used on a group of comments. When something has a related comment, it would use aria-details to point to the comment section. Individual comments would use role="comment", inheriting from "article", and supporting aria-level (in addition to the inherited aria-posinset and aria-setsize).
 
 
-# Clarification of existing markup {#clarification-of-existing-markup}
+# Clarification of existing markup
 
 
 
@@ -52,10 +52,7 @@ The markup described has already been reviewed by a number of accessibility deve
 *   A definition should be linked to a term using aria-details rather than aria-labelledby.
 
 
-# Examples {#examples}
-
-
-## Simple annotations -- no complex structure {#simple-annotations-no-complex-structure}
+## Simple annotations -- no complex structure
 
 Simple annotations occur when there is no additional related section in the document that represents the annotation body, that the user might need to navigate to. The annotation is a localized text string (that may or may not correspond to a tooltip).
 
@@ -81,7 +78,7 @@ In some cases, it may be helpful to provide a simple annotation purpose that is 
 In the future, commonly-used simple annotation purposes may be added to ARIA by creating new roles inheriting from "mark", e.g. "breakpoint". This would aid in filtering features of screen readers.
 
 
-## Structured annotations {#structured-annotations}
+## Structured annotations
 
 
 Structured ARIA Annotations build upon the foundation of [aria-details](https://www.w3.org/TR/wai-aria-1.2/#aria-details), providing optional additions needed to enhance the reading experience of consuming annotated content via assistive technology.
@@ -129,7 +126,7 @@ Note: this goes against the current spec which suggests to use aria-labelledby. 
 <div id="all-comments" role="commentsection"...</div>
 ```
 
-## Transient structured annotations {#transient-structured-annotations}
+## Transient structured annotations
 
 In some cases, structured annotations may only appear when a user navigates to an element. Unfortunately, this may make it difficult or impossible to implement an assistive technology command to navigate to other annotation bodies with a similar annotation purpose. 
 
@@ -142,7 +139,7 @@ In some cases, structured annotations may only appear when a user navigates to a
 <div id="catName-refs" role="tooltip">.. Several links to catName references ...</div>
 ```
 
-## Content changes -- suggestions and revisions {#content-changes-suggestions-and-revisions}
+## Content changes -- suggestions and revisions
 
 A suggestion is essentially a non-accepted revision. It’s helpful to be able to differentiate them, e.g. so that a user can navigate only potential changes that haven’t been accepted yet.
 
@@ -161,7 +158,7 @@ A revision or suggestion used to group required children of insertion and deleti
 Note: some browser implementations may need to special case a change from suggestion to revision, so that when a user accepts the suggestion, an accessible object is not unnecessarily destroyed and recreated, as may be done for other role changes.
 
 
-## Combination: a content change with a structured annotation {#combination-a-content-change-with-a-structured-annotation}
+## Combination: a content change with a structured annotation
 
 Revisions and suggestions are commonly used used in conjunction with a structured annotation, whether auto generated or manually written by an author. In the case of suggestions, the commentary UI may include a UI control for accepting the suggestion.
 
@@ -182,14 +179,14 @@ This combines the markup from structured annotations and content changes.
 <div id="attribution-1">Modified by user aleventhal on 10/10/2020</div>
 ```
 
-# Implementation Status and Instructions for Testing {#implementation-status-and-instructions-for-testing}
+# Implementation Status and Instructions for Testing
 
 
 *   TBD: instructions for testing the additional markup
 *   TBD: status of implementation and specification work
 
 
-# FAQ {#faq}
+# FAQ
 
 Q. Why is aria-details used instead of aria-describedby? \
 A. Unfortunately, many implementations of aria-describedby will simply flatten the pointed-to content into a description string, and does not allow a user to navigate to the pointed-to section. It is deemed important for the user to be able to navigate to structured annotations from the annotated content, or in the reverse direction.
@@ -206,7 +203,7 @@ A. ARIA Annotations are deliberately more limited than what can be expressed wit
 By design, ARIA Annotations do not contain as many semantic possibilities as the Web Annotation Data Model. However, any annotation can be mapped to the more generic ARIA annotations, if loss of some semantics is acceptable.
 
 
-# Glossary {#glossary}
+# Glossary
 
 This explainer takes steps to use consistent terminology and modeling from the Web Annotation Data Model [[annotation-model](https://w3c.github.io/annotation-aria/#bib-annotation-model)].
 
