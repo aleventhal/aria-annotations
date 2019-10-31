@@ -9,6 +9,7 @@ Annotations provide additional content related to a piece of content within a do
 
 The markup described has already been reviewed by a number of accessibility developers and stakeholders in key organizations, although no public signals have been provided. 
 
+Please add feedback on this proposal to the [ARIA Annotations GitHub issue #1109](https://github.com/w3c/aria/issues/1109).
 
 # Example Use Cases
 
