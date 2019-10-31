@@ -5,7 +5,7 @@
 
 ARIA Annotations provide markup for accessible, in-page annotations, using experimental ARIA markup. This proposal is for markup targeted to become an integrated part of ARIA 1.3. It supersedes the current separate ARIA Annotations draft specification.
 
-Annotations provide additional content related to a piece of content within a document. The most basic example is a description, which is possible today using aria-details. However, this explainer describes new markup that can be used to provide the annotation text, or to or provide the type of annotation.
+Annotations provide additional content related to a piece of content within a document. The most basic example is a description, which is possible today using aria-details. However, this explainer describes new markup that can be used to provide the annotation text, or to provide the type of annotation.
 
 The markup described has already been reviewed by a number of accessibility developers and stakeholders in key organizations, although no public signals have been provided. 
 
@@ -18,7 +18,7 @@ The markup described has already been reviewed by a number of accessibility deve
 
 
 *   Document editor: suggestions, revisions, comments, footnotes and other authors present
-*   Code editor: breakpoints, revision history, errors and warnings, etc.
+*   Code editor: breakpoints, revision history, errors and warnings, code comments, etc.
 *   Published content: attributions, footnotes and comments
 
 
@@ -37,10 +37,10 @@ The markup described has already been reviewed by a number of accessibility deve
 
 
 
-*   aria-description="[localized string]" (similar to how aria-label can be used instead of aria-labelledby. This is a generically useful attribute that has been requested for years, and can be placed on any element. [GitHub issue for aria-description](https://github.com/w3c/aria/issues/891).
+*   aria-description="[localized string]" (similar to how aria-label can be used instead of aria-labelledby). This is a generically useful attribute that has been requested for years, and can be placed on any element. [GitHub issue for aria-description](https://github.com/w3c/aria/issues/891).
 *   role="suggestion"|"revision" -- used to group changes in a document (role "deletion" and "insertion" children).
-*   role="mark" -- equivalent to HTML’s `<mark>`, to indicate highlighted text that has a special meaning or additional information tied to it (via aria-details=[id]). Future specific types of highlights could inherit from this, for example, code editor use cases could expand ARIA annotations to add breakpoint, error and warning roles. [GitHub issue for role="mark"](https://github.com/w3c/aria/issues/508). Annotated content may or may not be highlighted.
-*   role="commentsection" and "comment". A commentsection, inheriting from feed, is used to denote group of comments. Content would point toa related commentsection via aria-details. Individual comments within the comment section would use role="comment", inheriting from "article", and supporting aria-level (in addition to the inherited aria-posinset and aria-setsize).
+*   role="mark" -- equivalent to [HTML’s `<mark>`](https://html.spec.whatwg.org/multipage/text-level-semantics.html#the-mark-element), to indicate highlighted text that has a special meaning or additional information tied to it (via aria-details=[id]). Future specific types of highlights could inherit from this, for example, code editor use cases could expand ARIA annotations to add breakpoint, error and warning roles. [GitHub issue for role="mark"](https://github.com/w3c/aria/issues/508). Annotated content may or may not be highlighted.
+*   role="commentsection" and "comment". A commentsection, inheriting from feed, is used to denote a group of comments. Content would point to a related commentsection via aria-details. Individual comments within the comment section would use role="comment", inheriting from "article", and supporting aria-level (in addition to the inherited aria-posinset and aria-setsize).
 
 
 # Clarification of existing markup
@@ -142,7 +142,7 @@ In this example, an article has a comment section beneath it. The entire comment
 
 ```html
 <article aria-details="all-comments">...</article>
-<div id="all-comments" role="commentsection"...</div>
+<div id="all-comments" role="commentsection">...</div>
 ```
 
 ## Transient structured annotations
@@ -161,7 +161,7 @@ In some cases, structured annotations may only appear when a user navigates to a
 
 A revision is a change that has occured within a document. A suggestion is a potential change in a document. It’s helpful to be able to differentiate them, e.g. so that a user can navigate only potential changes that haven’t been accepted yet.
 
-A revision or suggestion used to group required children of insertion and deletion. They can have 1 insertion child, or 1 deletion child, or 1 of both (in any order). If content does not follow this structure correctly, ATs may not recognize and process the revision/suggestion correctly.
+A revision or suggestion is used to group required insertion and deletion children. They can have 1 insertion child, or 1 deletion child, or 1 of each (in any order). If content does not follow this structure correctly, ATs may not recognize and process the revision/suggestion correctly.
 
 ### Example -- Suggestion
 
@@ -193,7 +193,7 @@ Technical note: some browser implementations may need to special case a change f
 
 ## Combination: a content change with a structured annotation
 
-Revisions and suggestions are commonly used used in conjunction with a structured annotation, whether auto generated or manually written by an author. In the case of suggestions, the annotation may bea comment section, and may include a button for accepting the suggestion.
+Revisions and suggestions are commonly used in conjunction with a structured annotation, whether auto generated or manually written by an author. In the case of suggestions, the annotation may be a comment section, and may include a button for accepting the suggestion.
 
 
 ### Example -- Suggestion with comment
@@ -258,7 +258,7 @@ This explainer takes steps to use consistent terminology and modeling from the W
 
 <dl>
 <dt>annotation</dt>
-<dd>The combination of annotated content, one more of: an annotation purpose, a flat text text description, or a related annotation body.</dd>
+<dd>The combination of annotated content, one or more of: an annotation purpose, a flat text description, or a related annotation body.</dd>
 
 <dt>annotated content</dt>
 <dd>The range of text or other object which the annotation body is "about".<br><br>Note: In the [Web Annotations Data Model](https://www.w3.org/TR/annotation-model/#motivation-and-purpose), this is known as the **annotation target**. However, because the term "target" has a specific meaning in accessibility APIs as the end (and not beginning) of a relation, the term annotated content is preferred here, in order to avoid confusion with the actual directionality of `aria-details` in ARIA Annotation markup.
