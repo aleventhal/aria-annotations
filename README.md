@@ -273,3 +273,13 @@ This explainer takes steps to use consistent terminology and modeling from the W
 TBD: explain the difference between this and when the role is put on the annotated content itself, e.g. role="mark".
 </dd>
 </dl>
+
+# Implementations
+
+## Chrome
+- In IA2/ATK, exposes all of the roles via xml-roles object attribute
+- Exposes aria-description if run with command line flag `--enable-features=AccessibilityExposeARIAAnnotations`
+- ChromeVox supports a "move to previous/next same role"
+
+## Firefox
+- Exposes all of the roles via xml-roles
