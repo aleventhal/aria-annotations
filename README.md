@@ -39,7 +39,7 @@ Please add feedback on this proposal to the [ARIA Annotations GitHub issue #1109
 
 
 *   aria-description="[localized string]" (similar to how aria-label can be used instead of aria-labelledby). This is a generically useful attribute that has been requested for years, and can be placed on any element. [GitHub issue for aria-description](https://github.com/w3c/aria/issues/891). \
-Note for authors: aria-description should not be used when there is a more specific semantic to express the same information.
+Note for authors: aria-description should not be used when there is a more specific semantic to express the same information. \
 Order of precedence for description fields in accessibility APIs: 1) aria-describedby, 2) aria-description, 3) native markup such as HTML's @title
 *   role="suggestion"|"revision" -- used to group changes in a document (role "deletion" and "insertion" children).
 *   role="mark" -- equivalent to [HTML’s `<mark>`](https://html.spec.whatwg.org/multipage/text-level-semantics.html#the-mark-element), to indicate highlighted text that has a special meaning or additional information tied to it (via aria-details=[id]). Future specific types of highlights could inherit from this, for example, code editor use cases could expand ARIA annotations to add breakpoint, error and warning roles. [GitHub issue for role="mark"](https://github.com/w3c/aria/issues/508). Annotated content may or may not be highlighted.
@@ -51,7 +51,8 @@ Order of precedence for description fields in accessibility APIs: 1) aria-descri
 
 
 *   aria-details can be used to tie any kind of annotation body to annotated content. A "description" is just the most basic kind of annotation body. Other types of annotation body purposes can be assigned by putting a role on the annotation body, such as doc-footnote, doc-endnote, definition or commentsection.
-*   aria-details should support IDREFS as other relations do, otherwise it's unclear what an author should do when there happens to be multiple, unrelated annotations for the same piece of content.
+*   aria-details should support IDREFS as other relations do, otherwise it's unclear what an author should do when there happens to be multiple, unrelated annotations for the same piece of content. \
+This will require asking ATs to support this in their navigation scheme.
 *   A doc-footnote or doc-endnote should be linked to a doc-noteref using the existing aria-details relation property. 
 *   A term should be linked to its defintion using aria-details rather than aria-labelledby.
 
