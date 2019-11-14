@@ -44,11 +44,12 @@ Please add feedback on this proposal to the [ARIA Annotations GitHub issue #1109
 *   role="commentsection" and "comment". A commentsection, inheriting from feed, is used to denote a group of comments. Content would point to a related commentsection via aria-details. Individual comments within the comment section would use role="comment", inheriting from "article", and supporting aria-level (in addition to the inherited aria-posinset and aria-setsize).
 
 
-# Clarification of existing markup
+# Changes/clarification to existing markup
 
 
 
 *   aria-details can be used to tie any kind of annotation body to annotated content. A "description" is just the most basic kind of annotation body. Other types of annotation body purposes can be assigned by putting a role on the annotation body, such as doc-footnote, doc-endnote, definition or commentsection.
+*   aria-details should support IDREFS as other relations do, otherwise it's unclear what an author should do when there happens to be multiple, unrelated annotations for the same piece of content.
 *   A doc-footnote or doc-endnote should be linked to a doc-noteref using the existing aria-details relation property. 
 *   A term should be linked to its defintion using aria-details rather than aria-labelledby.
 
