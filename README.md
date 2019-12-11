@@ -284,7 +284,7 @@ This explainer takes steps to use consistent terminology and modeling from the W
 <dd>Visible information within a page which is connected to annotated content for a related purpose.</dd>
 
 <dt>annotation purpose</dt>
-<dd>The role the annotation body plays in relation to the annotated content (e.g. comment section vs. a footnote). 
+<dd>The role the annotation body plays in relation to the annotated content (e.g. comment vs. a footnote). 
 TBD: explain the difference between this and when the role is put on the annotated content itself, e.g. role="mark".
 </dd>
 </dl>
