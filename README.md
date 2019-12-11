@@ -120,20 +120,18 @@ Currently, footnotes and endnotes are defined by DPUB, but there is no good way 
 
 ### Example -- Comment section for a specific piece of content
 
-Comments are special and worth providing special semantics for, to enable navigation between and within comment sections.
+Comments are special and worth providing special semantics for, to enable navigation between comments.
 Some comment sections may contain a tree structure of replies.
 
 In this example, a comment section is linked to a small piece of text within the document.
 
 ```html
 <p>The <span aria-details="thread-1">cat is smart</span>.</p>
-<div role="commentsection" id="thread-1">
-  <div role="comment">
-     As far as you can tell! Does she talk?
-      <div role="comment">
-         Yes, but only I understand her
-      </div>
-  </div>
+<div role="comment">
+   As far as you can tell! Does she talk?
+    <div role="comment">
+       Yes, but only I understand her
+    </div>
   <form>
     <textarea placeholder="Reply here…"></textarea>
     <input type="submit">
@@ -143,11 +141,22 @@ In this example, a comment section is linked to a small piece of text within the
 
 ### Example -- Comment section for entire article
 
-In this example, an article has a comment section beneath it. The entire comment section can be linked to the article.
+In this example, an article has a comment section beneath it. The entire comment section can be linked to the article. The reply structure can be implemented via DOM descendants or aria-owns.
 
 ```html
 <article aria-details="all-comments">...</article>
-<div id="all-comments" role="commentsection">...</div>
+<div id="all-comments">
+  <div role="comment">
+    Comment
+    <div role="comment">
+      Reply 1
+    </div>
+    <div role="comment">
+      Reply 2
+    </div>
+  </div>
+</div>
+
 ```
 
 ## Transient structured annotations
@@ -198,7 +207,7 @@ Technical note: some browser implementations may need to special case a change f
 
 ## Combination: a content change with a structured annotation
 
-Revisions and suggestions are commonly used in conjunction with a structured annotation, whether auto generated or manually written by an author. In the case of suggestions, the annotation may be a comment section, and may include a button for accepting the suggestion.
+Revisions and suggestions are commonly used in conjunction with a structured annotation, whether auto generated or manually written by an author. In the case of suggestions, the annotation may be a comment, and may include a button for accepting the suggestion.
 
 
 ### Example -- Suggestion with comment
@@ -211,10 +220,13 @@ Revisions and suggestions are commonly used in conjunction with a structured ann
     <span role="insertion">dog</span>
   </span>
 </p>
-<div id="comment-thread-1" role="commentsection">
+<div id="comment-thread-1" role="comment">
   <p>Suggested change from Frederico"</p>
   <p>I think dogs are better</p>
   <button>Accept</buton>
+  <div role="comment">
+    <p>My reply.</p>
+  </div>
 </div>
 ```
 
