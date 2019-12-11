@@ -118,12 +118,12 @@ Currently, footnotes and endnotes are defined by DPUB, but there is no good way 
 </p>
 ```
 
-### Example -- Comment section for a specific piece of content
+### Example -- Comments on a specific piece of content
 
 Comments are special and worth providing special semantics for, to enable navigation between comments.
-Some comment sections may contain a tree structure of replies.
+Some comments may contain a tree structure of replies.
 
-In this example, a comment section is linked to a small piece of text within the document.
+In this example, a comment is linked to a small piece of text within the document.
 
 ```html
 <p>The <span aria-details="thread-1">cat is smart</span>.</p>
@@ -139,13 +139,13 @@ In this example, a comment section is linked to a small piece of text within the
 </div>
 ```
 
-### Example -- Comment section for entire article
+### Example -- Comments for entire article
 
 In this example, an article has a comment section beneath it. The entire comment section can be linked to the article. The reply structure can be implemented via DOM descendants or aria-owns.
 
 ```html
 <article aria-details="all-comments">...</article>
-<div id="all-comments">
+<div role="section" id="all-comments">
   <div role="comment">
     Comment
     <div role="comment">
