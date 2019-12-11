@@ -29,7 +29,7 @@ Please add feedback on this proposal to the [ARIA Annotations GitHub issue #1109
 
 *   User issues command to navigate to previous/next annotated content (e.g. next commented text)
 *   User issues command to navigate to previous/next annotation body (e.g. next comment)
-*   User issues one of the above commands, but filtered by annotation purpose (e.g. navigate between text linked to a comment section, or navigate between comment sections)
+*   User issues one of the above commands, but filtered by annotation purpose (e.g. navigate between text linked to a comment or navigate between comments)
 *   User issues command to navigate from annotation body to the annotated content, or vice-versa
 *   User adjusts setting for annotation verbosity in screen reader, e.g. all, shortened, none. Screen reader adjusts output, e.g. in shortened Braille "has comments" becomes something like "\*ct", audio output utilizes an earcon/sound.
 
@@ -43,14 +43,14 @@ Note for authors: aria-description should not be used when there is a more speci
 Order of precedence for description fields in accessibility APIs: 1) aria-describedby, 2) aria-description, 3) native markup such as HTML's @title
 *   role="suggestion"|"revision" -- used to group changes in a document (role "deletion" and "insertion" children).
 *   role="mark" -- equivalent to [HTML’s `<mark>`](https://html.spec.whatwg.org/multipage/text-level-semantics.html#the-mark-element), to indicate highlighted text that has a special meaning or additional information tied to it (via aria-details=[id]). Future specific types of highlights could inherit from this, for example, code editor use cases could expand ARIA annotations to add breakpoint, error and warning roles. [GitHub issue for role="mark"](https://github.com/w3c/aria/issues/508). Annotated content may or may not be highlighted.
-*   role="commentsection" and "comment". A commentsection, inheriting from feed, is used to denote a group of comments. Content would point to a related commentsection via aria-details. Individual comments within the comment section would use role="comment", inheriting from "article", and supporting aria-level (in addition to the inherited aria-posinset and aria-setsize).
+*   role="comment" -- Content would point to a related comment via aria-details. Replies to comments would be child elements or virtual children via aria-owns. The level of the comment, setsize and posinset should be automatically exposed by the browser. The author can use aria-level, aria-setsize an aria-posinset to override these computations.
 
 
 # Changes/clarification to existing markup
 
 
 
-*   aria-details can be used to tie any kind of annotation body to annotated content. A "description" is just the most basic kind of annotation body. Other types of annotation body purposes can be assigned by putting a role on the annotation body, such as doc-footnote, doc-endnote, definition or commentsection.
+*   aria-details can be used to tie any kind of annotation body to annotated content. A "description" is just the most basic kind of annotation body. Other types of annotation body purposes can be assigned by putting a role on the annotation body, such as doc-footnote, doc-endnote, definition or comment.
 *   aria-details should support IDREFS as other relations do, otherwise it's unclear what an author should do when there happens to be multiple, unrelated annotations for the same piece of content. \
 This will require asking ATs to support this in their navigation scheme.
 *   A doc-footnote or doc-endnote should be linked to a doc-noteref using the existing aria-details relation property. 
