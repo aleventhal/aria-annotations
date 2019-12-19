@@ -5,9 +5,7 @@
 
 ARIA Annotations provide markup for accessible, in-page annotations, using experimental ARIA markup. This proposal is for markup targeted to become an integrated part of ARIA 1.3. It supersedes the current separate ARIA Annotations draft specification.
 
-Annotations provide additional content related to a piece of content within a document. The most basic example is a description, which is possible today using aria-details. However, this explainer describes new markup that can be used to provide the annotation text, or to provide the type of annotation.
-
-The markup described has already been reviewed by a number of accessibility developers and stakeholders in key organizations, although no public signals have been provided. 
+Annotations provide additional content related to a piece of content within a document. The most basic example is a description, which is already specified today using aria-details. However, this explainer describes new markup that can be used to provide the annotation text (aria-description), or to provide more semantic information about the annotation. There is a parallel effort to work with assistive technology vendors to work on their implementations for both the existing and new markup.
 
 Please add feedback on this proposal to the [ARIA Annotations GitHub issue #1109](https://github.com/w3c/aria/issues/1109).
 
@@ -133,7 +131,7 @@ Some comments may contain a tree structure of replies.
 In this example, a comment is linked to a small piece of text within the document.
 
 ```html
-<p>The <span aria-details="thread-1">cat is smart</span>.</p>
+<p>The <span role="mark" aria-details="thread-1">cat is smart</span>.</p>
 <div role="comment">
    As far as you can tell! Does she talk?
     <div role="comment">
@@ -186,8 +184,6 @@ The suggestion role is used on the parent of the change element(s) to differenti
 
 When a suggestion is accepted the role on the containing element should be removed, effectively changing it into a revision.
 
-### Example -- Suggestion
-
 ### Example -- Revision
 
 ```html
@@ -198,6 +194,9 @@ When a suggestion is accepted the role on the containing element should be remov
   <span role="insertion">dog</span>
 </p>
 ```
+
+### Example -- Suggestion
+
 
 ```html
 <p>
@@ -243,7 +242,7 @@ Revisions and suggestions are commonly used in conjunction with a structured ann
 ```html
 <p>
   The best pet is a
-  <span role="revision" aria-details="attribution-1">
+  <span aria-details="attribution-1">
     <span role="deletion">cat</span>
     <span role="insertion">dog</span>
   </span>
@@ -253,13 +252,6 @@ Revisions and suggestions are commonly used in conjunction with a structured ann
 </div>
 ```
 
-# Implementation Status and Instructions for Testing
-
-
-*   TBD: instructions for testing the additional markup
-*   TBD: status of implementation and specification work
-
-
 # FAQ
 
 Q. Why is aria-details used instead of aria-describedby? \
@@ -267,9 +259,6 @@ A. Unfortunately, many implementations of aria-describedby will simply flatten t
 
 Q. Why isn’t aria-description already part of the ARIA spec? \
 A. Historically, it was thought that anything that would go into a description should also be accessible visually in the content. This has led to a widespread use of invisible aria-describedby sections, and many requests for the addition of an attribute like aria-description, analogous to aria-label and supporting a flat string.
-
-Q. What if there are multiple structured annotations for a single piece of content? \
-A. It’s possible  that aria-details should be expanded to allow multiple IDs. It currently only supports one. This is at least worth a discussion.
 
 Q. How do ARIA Annotations relate to the Web Annotations Data Model? \
 A. ARIA Annotations are deliberately more limited than what can be expressed within a Web Annotations Data Model [annotation-model] document. For example, ARIA Annotations cannot directly point to information external to the current Web page. However, they can point to a section in a web page that contains external links.
@@ -292,8 +281,7 @@ This explainer takes steps to use consistent terminology and modeling from the W
 <dd>Visible information within a page which is connected to annotated content for a related purpose.</dd>
 
 <dt>annotation purpose</dt>
-<dd>The role the annotation body plays in relation to the annotated content (e.g. comment vs. a footnote). 
-TBD: explain the difference between this and when the role is put on the annotated content itself, e.g. role="mark".
+<dd>The role the annotation body plays in relation to the annotated content (e.g. comment, definition or footnote). 
 </dd>
 </dl>
 
