@@ -38,12 +38,18 @@ Please add feedback on this proposal to the [ARIA Annotations GitHub issue #1109
 
 
 
-*   aria-description="[localized string]" (similar to how aria-label can be used instead of aria-labelledby). This is a generically useful attribute that has been requested for years, and can be placed on any element. [GitHub issue for aria-description](https://github.com/w3c/aria/issues/891). \
+*   aria-description="[localized string]" (similar to how aria-label can be used instead of aria-labelledby). This is a generically useful attribute that has been requested for years, and can be placed on any element. \
+[GitHub issue for aria-description](https://github.com/w3c/aria/issues/891). \
+[Pull request for aria-description](https://github.com/w3c/aria/pull/1137). \
 Note for authors: aria-description should not be used when there is a more specific semantic to express the same information. \
 Order of precedence for description fields in accessibility APIs: 1) aria-describedby, 2) aria-description, 3) native markup such as HTML's @title
-*   role="suggestion"|"revision" -- used to group changes in a document (role "deletion" and "insertion" children).
-*   role="mark" -- equivalent to [HTML’s `<mark>`](https://html.spec.whatwg.org/multipage/text-level-semantics.html#the-mark-element), to indicate highlighted text that has a special meaning or additional information tied to it (via aria-details=[id]). Future specific types of highlights could inherit from this, for example, code editor use cases could expand ARIA annotations to add breakpoint, error and warning roles. [GitHub issue for role="mark"](https://github.com/w3c/aria/issues/508). Annotated content may or may not be highlighted.
-*   role="comment" -- Content would point to a related comment via aria-details. Replies to comments would be child elements or virtual children via aria-owns. The level of the comment, setsize and posinset should be automatically exposed by the browser. The author can use aria-level, aria-setsize an aria-posinset to override these computations.
+*   role="suggestion" -- used to group proposed changes in a document (role "deletion" and "insertion" children). \
+[Pull request for role="suggestion"](https://github.com/w3c/aria/pull/1134).
+*   role="mark" -- equivalent to [HTML’s `<mark>`](https://html.spec.whatwg.org/multipage/text-level-semantics.html#the-mark-element), to indicate highlighted text that has a special meaning or additional information tied to it (via aria-details=[id]). Future specific types of highlights could inherit from this, for example, code editor use cases could expand ARIA annotations to add breakpoint, error and warning roles. Note: annotated content is not always highlighted. \
+[GitHub issue for role="mark"](https://github.com/w3c/aria/issues/508). \
+[Pull request for role="mark"](https://github.com/w3c/aria/pull/1133).
+*   role="comment" -- Content would point to a related comment via aria-details. Replies to comments would be child elements or virtual children via aria-owns. The level of the comment, setsize and posinset should be automatically exposed by the browser. The author can use aria-level, aria-setsize an aria-posinset to override these computations. \
+[Pull request for role="comment"](https://github.com/w3c/aria/pull/1135).
 
 
 # Changes/clarification to existing markup
@@ -52,6 +58,7 @@ Order of precedence for description fields in accessibility APIs: 1) aria-descri
 
 *   aria-details can be used to tie any kind of annotation body to annotated content. A "description" is just the most basic kind of annotation body. Other types of annotation body purposes can be assigned by putting a role on the annotation body, such as doc-footnote, doc-endnote, definition or comment.
 *   aria-details should support IDREFS as other relations do, otherwise it's unclear what an author should do when there happens to be multiple, unrelated annotations for the same piece of content. \
+[Pull request for changes to aria-details](https://github.com/w3c/aria/pull/1136). \
 This will require asking ATs to support this in their navigation scheme.
 *   A doc-footnote or doc-endnote should be linked to a doc-noteref using the existing aria-details relation property. 
 *   A term should be linked to its defintion using aria-details rather than aria-labelledby.
@@ -173,11 +180,24 @@ In some cases, structured annotations may only appear when a user navigates to a
 
 ## Content changes -- suggestions and revisions
 
-A revision is a change that has occured within a document. A suggestion is a potential change in a document. It’s helpful to be able to differentiate them, e.g. so that a user can navigate only potential changes that haven’t been accepted yet.
+A revision is a change that has already occured within a document, whereas a suggestion is a potential change in a document. In both cases, the change or potential change is represented by 1 insertion element, or 1 deletion element, or 1 of each (adjacent, and in either order). These can be indicated using `<ins>`/`<del>` or `role="insertion"|"deletion"`. If content does not follow this structure correctly, ATs may not recognize and process the suggestion/revision correctly. 
 
-A revision or suggestion is used to group required insertion and deletion children. They can have 1 insertion child, or 1 deletion child, or 1 of each (in any order). If content does not follow this structure correctly, ATs may not recognize and process the revision/suggestion correctly.
+The suggestion role is used on the parent of the change element(s) to differentiate the change from a revision, so that a user can navigate only potential changes that haven’t been accepted yet. However, a revision itself does not require any particular role to parent the change, as the existence of the adjacent insertion and deletion elements already represent a revision.
+
+When a suggestion is accepted the role on the containing element should be removed, effectively changing it into a revision.
 
 ### Example -- Suggestion
+
+### Example -- Revision
+
+```html
+
+<p>
+  The best pet is a
+  <span role="deletion">cat</span>
+  <span role="insertion">dog</span>
+</p>
+```
 
 ```html
 <p>
@@ -187,20 +207,8 @@ A revision or suggestion is used to group required insertion and deletion childr
     <span role="insertion">dog</span>
   </span>
 </p>
-```
+``
 
-### Example -- Revision
-
-```html
-
-<p>
-  The best pet is a
-  <span role="revision">
-    <span role="deletion">cat</span>
-    <span role="insertion">dog</span>
-  </span>
-</p>
-```
 
 Technical note: some browser implementations may need to special case a change from suggestion to revision, so that when a user accepts the suggestion, an accessible object is not unnecessarily destroyed and recreated, as may be done for other role changes.
 
