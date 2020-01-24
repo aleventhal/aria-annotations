@@ -206,7 +206,7 @@ When a suggestion is accepted the role on the containing element should be remov
     <span role="insertion">dog</span>
   </span>
 </p>
-``
+```
 
 
 Technical note: some browser implementations may need to special case a change from suggestion to revision, so that when a user accepts the suggestion, an accessible object is not unnecessarily destroyed and recreated, as may be done for other role changes.
