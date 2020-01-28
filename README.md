@@ -3,7 +3,7 @@
 
 # Summary
 
-ARIA Annotations provide markup for accessible, in-page annotations, using experimental ARIA markup. This proposal is for markup targeted to become an integrated part of ARIA 1.3. It supersedes the current separate ARIA Annotations draft specification.
+ARIA Annotations provide markup for accessible, in-page annotations, using markup targeted to become part of ARIA 1.3.
 
 Annotations provide additional content related to a piece of content within a document. The most basic example is a description, which is already specified today using aria-details. However, this explainer describes new markup that can be used to provide the annotation text (aria-description), or to provide more semantic information about the annotation. There is a parallel effort to work with assistive technology vendors to work on their implementations for both the existing and new markup.
 
