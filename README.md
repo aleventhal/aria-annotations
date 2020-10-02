@@ -3,11 +3,10 @@
 
 # Summary
 
-ARIA Annotations provide markup for accessible, in-page annotations, using markup targeted to become part of ARIA 1.3.
+ARIA Annotations provide markup for accessible, in-page annotations, using new markup in ARIA 1.2.
 
 Annotations provide additional content related to a piece of content within a document. The most basic example is a description, which is already specified today using aria-details. However, this explainer describes new markup that can be used to provide the annotation text (aria-description), or to provide more semantic information about the annotation. There is a parallel effort to work with assistive technology vendors to work on their implementations for both the existing and new markup.
 
-Please add feedback on this proposal to the [ARIA Annotations GitHub issue #1109](https://github.com/w3c/aria/issues/1109).
 
 # Example Use Cases
 
@@ -32,22 +31,16 @@ Please add feedback on this proposal to the [ARIA Annotations GitHub issue #1109
 *   User adjusts setting for annotation verbosity in screen reader, e.g. all, shortened, none. Screen reader adjusts output, e.g. in shortened Braille "has comments" becomes something like "\*ct", audio output utilizes an earcon/sound.
 
 
-# Summary of proposed new markup
+# Summary of new markup
 
 
 
 *   aria-description="[localized string]" (similar to how aria-label can be used instead of aria-labelledby). This is a generically useful attribute that has been requested for years, and can be placed on any element. \
-[GitHub issue for aria-description](https://github.com/w3c/aria/issues/891). \
-[Pull request for aria-description](https://github.com/w3c/aria/pull/1137). \
 Note for authors: aria-description should not be used when there is a more specific semantic to express the same information. \
 Order of precedence for description fields in accessibility APIs: 1) aria-describedby, 2) aria-description, 3) native markup such as HTML's @title
-*   role="suggestion" -- used to group proposed changes in a document (role "deletion" and "insertion" children). \
-[Pull request for role="suggestion"](https://github.com/w3c/aria/pull/1134).
-*   role="mark" -- equivalent to [HTML’s `<mark>`](https://html.spec.whatwg.org/multipage/text-level-semantics.html#the-mark-element), to indicate highlighted text that has a special meaning or additional information tied to it (via aria-details=[id]). Future specific types of highlights could inherit from this, for example, code editor use cases could expand ARIA annotations to add breakpoint, error and warning roles. Note: annotated content is not always highlighted. \
-[GitHub issue for role="mark"](https://github.com/w3c/aria/issues/508). \
-[Pull request for role="mark"](https://github.com/w3c/aria/pull/1133).
-*   role="comment" -- Content would point to a related comment via aria-details. Replies to comments would be child elements or virtual children via aria-owns. The level of the comment, setsize and posinset should be automatically exposed by the browser. The author can use aria-level, aria-setsize an aria-posinset to override these computations. \
-[Pull request for role="comment"](https://github.com/w3c/aria/pull/1135).
+*   role="suggestion" -- used to group proposed changes in a document (role "deletion" and "insertion" children).
+*   role="mark" -- equivalent to [HTML’s `<mark>`](https://html.spec.whatwg.org/multipage/text-level-semantics.html#the-mark-element), to indicate highlighted text that has a special meaning or additional information tied to it (via aria-details=[id]). Future specific types of highlights could inherit from this, for example, code editor use cases could expand ARIA annotations to add breakpoint, error and warning roles. Note: annotated content is not always highlighted.
+*   role="comment" -- Content would point to a related comment via aria-details. Replies to comments would be child elements or virtual children via aria-owns. The level of the comment, setsize and posinset should be automatically exposed by the browser. The author can use aria-level, aria-setsize an aria-posinset to override these computations.
 
 
 # Changes/clarification to existing markup
@@ -263,7 +256,7 @@ A. Historically, it was thought that anything that would go into a description s
 Q. How do ARIA Annotations relate to the Web Annotations Data Model? \
 A. ARIA Annotations are deliberately more limited than what can be expressed within a Web Annotations Data Model [annotation-model] document. For example, ARIA Annotations cannot directly point to information external to the current Web page. However, they can point to a section in a web page that contains external links.
 
-By design, ARIA Annotations do not contain as many semantic possibilities as the Web Annotation Data Model. However, any annotation can be mapped to the more generic ARIA annotations, if loss of some semantics is acceptable.
+By design, ARIA Annotations do not contain nearly as many semantic possibilities as the Web Annotation Data Model. However, any annotation can be mapped to the more generic ARIA annotations, if loss of some semantics is acceptable.
 
 
 # Glossary
@@ -285,12 +278,16 @@ This explainer takes steps to use consistent terminology and modeling from the W
 </dd>
 </dl>
 
-# Implementations
+# Implementations (may be out of date)
 
-## Chrome
-- In IA2/ATK, exposes all of the roles via xml-roles object attribute
-- Exposes aria-description if run with command line flag `--enable-features=AccessibilityExposeARIAAnnotations`
-- ChromeVox supports a "move to previous/next same role"
+## Screen readers
+Screen readers: still early for screen reader implementations. See discussion of [ideal screen reader UX](https://docs.google.com/document/d/1DYrsHDk6Y9071A1fRg8g8NZ_DtGYraX5BcVY-taBzMQ/edit#)
 
-## Firefox
-- Exposes all of the roles via xml-roles
+- Orca has complete annotations support in Chrome and Firefox
+- ChromeVox supports a "move to previous/next same role", supports navigation to aria-details
+
+## Chrome and Firefox
+- Complete implementation of all markup
+
+## Edge
+- Still needs mappings from annotations in UIA.
