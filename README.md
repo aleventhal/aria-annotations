@@ -148,7 +148,7 @@ In this example, an article has a comment section beneath it. The entire comment
 
 ```html
 <article aria-details="all-comments">...</article>
-<div role="section" id="all-comments">
+<div role="region" id="all-comments">
   <div role="comment">
     Comment
     <div role="comment">
