@@ -7,7 +7,10 @@ ARIA Annotations provide markup for accessible, in-page annotations, using new m
 
 Annotations provide additional content related to a piece of content within a document. The most basic example is a description, which is already specified today using aria-details. However, this explainer describes new markup that can be used to provide the annotation text (aria-description), or to provide more semantic information about the annotation. There is a parallel effort to work with assistive technology vendors to work on their implementations for both the existing and new markup.
 
-As another resource, here is a [Codepen with example ARIA annotations and other useful markup for an online word processor](https://codepen.io/aleventhal/full/VxByVK/).
+Other resources:
+
+* A [codepen with example ARIA annotations and other useful markup for an online word processor](https://codepen.io/aleventhal/full/VxByVK/).
+* A [collaborative brainstorming document to describe screen reader behaviors](https://docs.google.com/document/d/1DYrsHDk6Y9071A1fRg8g8NZ_DtGYraX5BcVY-taBzMQ/edit#heading=h.3ouywf2zdx7) -- file an issue if you would like comment access.
 
 
 # Example Use Cases
