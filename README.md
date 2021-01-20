@@ -130,7 +130,7 @@ In this example, a comment is linked to a small piece of text within the documen
 
 ```html
 <p>The <span role="mark" aria-details="thread-1">cat is smart</span>.</p>
-<div role="comment">
+<div role="comment" id="thread-1">
    As far as you can tell! Does she talk?
     <div role="comment">
        Yes, but only I understand her
